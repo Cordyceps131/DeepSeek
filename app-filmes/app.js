@@ -1,4 +1,4 @@
-const apiKey = 'c4a8205'
+import { apiKey } from './api.js'
 
 const buscar = async (userInput) => {
     try {
@@ -6,12 +6,12 @@ const buscar = async (userInput) => {
         const pesquisa = await resposta.json()
 
         console.log(pesquisa.Search[0]);
-        
+
 
         console.log(`
             Título: ${pesquisa.Search[0].Title}\n
             Ano: ${pesquisa.Search[0].Year}\n
-            Tipoe: ${pesquisa.Search[0].Type}\n
+            Tipo: ${pesquisa.Search[0].Type}\n
             Capa: ${pesquisa.Search[0].Poster}\n
         `)
 
@@ -20,6 +20,6 @@ const buscar = async (userInput) => {
     }
 }
 
-let filme = 'interstellar'
+let filme = 'toy story'
 
 buscar(filme);
