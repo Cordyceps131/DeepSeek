@@ -21,9 +21,9 @@ const renderCard = (filmes) => {
         if (filme.Poster) {
             moviesContainer.innerHTML += `
             <article class="card">
-                <a id="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
-                <h3 id="card-title">${filme.Title}</h3>
-                <p id="card-year">${filme.Year}</p>
+                <a class="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
+                <h3 class="card-title">${filme.Title}</h3>
+                <p class="card-year">${filme.Year}</p>
             </article>
         `
         };
