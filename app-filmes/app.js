@@ -5,21 +5,49 @@ const buscar = async (userInput) => {
         const resposta = await fetch(`http://www.omdbapi.com/?s=${userInput}&apikey=${apiKey}`)
         const pesquisa = await resposta.json()
 
-        console.log(pesquisa.Search[0]);
-
-
-        console.log(`
-            Título: ${pesquisa.Search[0].Title}\n
-            Ano: ${pesquisa.Search[0].Year}\n
-            Tipo: ${pesquisa.Search[0].Type}\n
-            Capa: ${pesquisa.Search[0].Poster}\n
-        `)
+        return pesquisa
 
     } catch (error) {
         console.log(`ERROR: ${error}`)
     }
 }
 
-let filme = 'toy story'
 
-buscar(filme);
+
+const btn = document.getElementById('search-btn')
+const moviesContainer = document.getElementById('movies-container')
+const headerSearchBar = document.getElementById('search-bar')
+
+
+
+btn.addEventListener('click', async (e) => {
+    e.preventDefault()
+
+    const pesquisa = headerSearchBar.value.trim()
+
+    const filme = await buscar(pesquisa)
+    const listaFilmes = filme.Search
+
+    if(!pesquisa){
+        alert('⚠️ Introduza um nome para pesquisar! ⚠️')
+    }
+
+    if(listaFilmes == undefined){
+        alert("🚫 Filme não encontrado 🚫")
+    }
+
+    moviesContainer.innerHTML = ''
+
+    listaFilmes.forEach(filme => {
+        if (filme.Poster) {
+            moviesContainer.innerHTML += `
+            <article class="card" id="card">
+                <a id="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
+                <h3 id="card-title">${filme.Title}</h3>
+                <p id="card-year">${filme.Year}</p>
+            </article>
+        `
+        }
+    });
+
+})

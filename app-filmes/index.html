@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fletnix</title>
+    <script src="./app.js" type="module"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./Amanita_Muscaria.png">
 </head>
+
 <body>
-    
-    
+    <header>
+        <a href="./index.html"><img src="#" alt="Fletnix"></a>
+        <form action="./index.html" class="haeder-search">
+            <input type="search" name="SEARCH" placeholder="Search for Movies / Series..." id="search-bar">
+            <button id="search-btn">Search</button>
+        </form>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="#">Movies</a>
+            <a href="#" target="_blank">Series</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filters">
+            <input type="search">
+            <select name="filter" id="filter">
+                <option value="filtro">Selecionar Filtro</option>
+                <option value="ano">Ano</option>
+                <option value="genero">Género</option>
+            </select>
+        </section>
+        <section class="list" id="movies-container">
+        </section>
+    </main>
+
 </body>
-<script></script>
+
 </html>
