@@ -12,26 +12,20 @@
 
 <body>
     <header>
-        <a href="./index.html"><img src="#" alt="Fletnix"></a>
+        <a href="./index.html" id="title">Fletnix</a>
         <form action="./index.html" class="haeder-search">
             <input type="search" name="SEARCH" placeholder="Search for Movies / Series..." id="search-bar">
             <button id="search-btn">Search</button>
         </form>
-        <nav>
-            <a href="./index.html">Home</a>
-            <a href="#">Movies</a>
-            <a href="#" target="_blank">Series</a>
-        </nav>
     </header>
 
     <main>
         <section class="filters">
-            <input type="search">
-            <select name="filter" id="filter">
-                <option value="filtro">Selecionar Filtro</option>
-                <option value="ano">Ano</option>
-                <option value="genero">Género</option>
-            </select>
+            <div>
+                <input type="search" id="filter-text" placeholder="Filtrar por ano...">
+                <button id="filter-btn">Enter</button>
+            </div>
+            <p id="msg"></p>
         </section>
         <section class="list" id="movies-container">
         </section>
