@@ -46,7 +46,7 @@ header{
     margin: 20px;
 }
 
-#card-img img{
+.card-img img{
     height: 450px;
     width: 300px;
     overflow: auto;

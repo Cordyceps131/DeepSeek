@@ -17,18 +17,31 @@ const moviesContainer = document.getElementById('movies-container');
 
 
 const renderCard = (filmes) => {
-    filmes.forEach(filme => {
-        if (filme.Poster) {
-            moviesContainer.innerHTML += `
+    moviesContainer.innerHTML = ''
+    
+    const html = filmes
+        .filter(f => f.Poster)
+        .map(f => `
             <article class="card">
-                <a class="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
-                <h3 class="card-title">${filme.Title}</h3>
-                <p class="card-year">${filme.Year}</p>
+                <a class="card-img" href="#"><img src="${f.Poster}" alt="${f.Title}-img"></a>
+                <h3 class="card-title">${f.Title}</h3>
+                <p class="card-year">${f.Year}</p>
             </article>
-        `
-        };
-    });
+        ` ).join('');
+
+    moviesContainer.innerHTML = html;
 };
+
+// .forEach(filme => {
+//     if (filme.Poster) {
+//         <article class="card">
+//             <a class="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
+//             <h3 class="card-title">${filme.Title}</h3>
+//             <p class="card-year">${filme.Year}</p>
+//         </article>
+//         `
+//         };
+//     });
 
 
 const btn = document.getElementById('search-btn');
@@ -60,7 +73,7 @@ btn.addEventListener('click', async (e) => {
         return;
     }
 
-    msg.textContent = `Encontrámos ${filme.totalResults} filmes relacionados com a pesquisa`;
+    msg.textContent = `Encontrámos ${filme.Search.length} filmes relacionados com a pesquisa`;
     moviesContainer.innerHTML = '';
 
 
@@ -95,16 +108,21 @@ filtroBtn.addEventListener('click', async (e) => {
     const nomeFilme = headerSearchBar.value.trim();
     const anoFilme = filterSearchBar.value.trim();
 
-    const filme = await buscarFiltro(nomeFilme, anoFilme);
-    const filmes = filme.Search;
-
     if (!anoFilme) {
         alert('⚠️ Introduza um ano para filtrar! ⚠️');
         return;
     };
 
+    const filme = await buscarFiltro(nomeFilme, anoFilme);
+    const filmes = filme.Search;
 
-    msg.textContent = filme.totalResults ? `Encontrámos ${filme.totalResults} títulos relacionados com a pesquisa` : 'Não encontrámos nada';
+    if (filme.Response === 'False') {
+        msg.textContent = 'Não encontrámos nada';
+        moviesContainer.innerHTML = '';
+        return;
+    }
+
+    msg.textContent = `Encontrámos ${filme.Search.length} títulos relacionados com a pesquisa`;
     moviesContainer.innerHTML = '';
 
     renderCard(filmes);
