@@ -20,7 +20,7 @@ const renderCard = (filmes) => {
     filmes.forEach(filme => {
         if (filme.Poster) {
             moviesContainer.innerHTML += `
-            <article class="card" id="card">
+            <article class="card">
                 <a id="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
                 <h3 id="card-title">${filme.Title}</h3>
                 <p id="card-year">${filme.Year}</p>
