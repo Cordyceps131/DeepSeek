@@ -54,6 +54,12 @@ btn.addEventListener('click', async (e) => {
         return;
     }
 
+    if (filme.Response === 'False') {
+        msg.textContent = 'Não encontrámos nada';
+        moviesContainer.innerHTML = '';
+        return;
+    }
+
     msg.textContent = `Encontrámos ${filme.totalResults} filmes relacionados com a pesquisa`;
     moviesContainer.innerHTML = '';
 
