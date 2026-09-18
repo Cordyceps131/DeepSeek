@@ -32,18 +32,6 @@ const renderCard = (filmes) => {
     moviesContainer.innerHTML = html;
 };
 
-// .forEach(filme => {
-//     if (filme.Poster) {
-//         <article class="card">
-//             <a class="card-img" href="#"><img src="${filme.Poster}" alt="${filme.Title}-img"></a>
-//             <h3 class="card-title">${filme.Title}</h3>
-//             <p class="card-year">${filme.Year}</p>
-//         </article>
-//         `
-//         };
-//     });
-
-
 const btn = document.getElementById('search-btn');
 const headerSearchBar = document.getElementById('search-bar');
 const msg = document.getElementById('msg');
