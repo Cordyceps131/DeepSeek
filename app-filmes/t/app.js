@@ -47,7 +47,6 @@ btn.addEventListener('click', async (e) => {
         return;
     };
 
-    msg.textContent = '';
     renderer(filmes.Search)
     msg.textContent = `Encontrámos ${filmes.Search.length} títulos relacionados com a pesquisa`
 
@@ -57,7 +56,7 @@ btn.addEventListener('click', async (e) => {
 const procurarPorTituloEAno = async (nomeFilme, anoFilme) => {
     try {
         const resposta = await fetch(`https://www.omdbapi.com/?s=${nomeFilme}&y=${anoFilme}&apikey=${apiKey}`);
-        const filmes = resposta.json();
+        const filmes = await resposta.json();
         return filmes;
     } catch (error) {
         console.log(`ERRO: ${error}`);
