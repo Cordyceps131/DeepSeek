@@ -14,7 +14,6 @@ const procurarPorTitulo = async (userInput) => {
 const movieContainer = document.getElementById('movie-container')
 
 const renderer = (filmes) => {
-    movieContainer.innerHTML = '';
     const html = filmes
         .filter(f => f.Poster)
         .map(f => `
@@ -47,8 +46,8 @@ btn.addEventListener('click', async (e) => {
         return;
     };
 
-    renderer(filmes.Search)
     msg.textContent = `Encontrámos ${filmes.Search.length} títulos relacionados com a pesquisa`
+    renderer(filmes.Search)
 
 })
 
