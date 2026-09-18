@@ -1,0 +1,1 @@
+export const apoKey = 'A_TUA_CHAVE_AQUI';
