@@ -17,7 +17,8 @@ nano api.js
 ```
 Troca 'A_TUA_CHAVE_AQUI' pela tua chave API, dentro das aspas.
 
-Ctrl + O  e Enter de seguida para guardar
+Ctrl + O  e Enter de seguida para guardar  
 Ctrl + X para sair do editor
+
 
 Abrir index.html
