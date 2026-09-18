@@ -81,6 +81,6 @@ filterBtn.addEventListener('click', async () => {
         msg.textContent = "🚫 Filme não encontrado 🚫";
         return;
     }
-    msg.textContent = `Encontrámos ${filmes.Search.length} títulos com o nomw "${nomeFilme}" para o ano "${anoFilme}" `;
+    msg.textContent = `Encontrámos ${filmes.Search.length} títulos com o nome "${nomeFilme}" para o ano "${anoFilme}" `;
     renderer(filmes.Search)
 })
