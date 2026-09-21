@@ -1,0 +1,37 @@
+********** Fase 1 — Estrutura básica (sem persistência) *********
+1. Criar HTML: input, botão "Adicionar", lista vazia, contador
+2. Criar array vazio `tarefas` em JS
+3. Ao clicar "Adicionar":
+   a. Ler o input
+   b. Se vazio → mensagem de erro → parar
+   c. Criar objeto tarefa: { id, texto, concluida: false }
+   d. Adicionar ao array
+   e. Limpar o input
+   f. Renderizar a lista
+4. Função renderizar():
+   a. Limpar a lista no HTML
+   b. Para cada tarefa: gerar HTML (texto + checkbox + botão apagar)
+   c. Meter tudo no DOM
+   d. Atualizar contador
+5. Botão apagar:
+   a. Encontrar a tarefa pelo id
+   b. Remover do array
+   c. Re-renderizar
+6. Checkbox:
+   a. Encontrar a tarefa pelo id
+   b. Alternar `concluida` entre true/false
+   c. Re-renderizar
+
+
+********** Fase 2 — Persistência **********
+7. Sempre que o array muda → guardar em localStorage
+8. Ao carregar a página → ler do localStorage → renderizar
+
+
+********** Fase 3 — Extras (se der tempo) **********
+9. Edição de tarefa
+10. Selecionar vários
+
+
+!!!!! ***** IMPORTANTE ***** !!!!!
+ALTERAR DADOS -> RENDERIZAR
