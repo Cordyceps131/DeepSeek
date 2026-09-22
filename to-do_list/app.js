@@ -60,6 +60,14 @@ listaTarefas.addEventListener('click', (e) => {
         atualizarContador();
     }
 
+    if(e.target.classList.contains('checkbox')){
+        const li = e.target.closest('li');
+        const id = Number(li.id);
+
+        const index = tarefas.findIndex(t => t.id === id)
+        tarefas[index].concluida = !tarefas[index].concluida;
+        atualizarContador();
+    }
 });
 
 
