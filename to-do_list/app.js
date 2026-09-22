@@ -17,7 +17,8 @@ const render = (tarefas) => {
                 ${t.texto}&nbsp;
                 <input class="checkbox" type="checkbox" ${t.concluida ? "checked" : ''}>
             </label>
-            <button class="apagar-btn">✖</button>
+            <button class="editar" title="Editar Tarefa">✏</button>
+            <button class="apagar-btn" title="Apagar Tarefa">✖</button>
         </li>
        `
     ).join('');
@@ -62,6 +63,13 @@ inputBtn.addEventListener('click', (e) => {
 });
 
 
+const modal = document.getElementById('form');
+const formInput = document.getElementById('form-input');
+const formBtn = document.getElementById('form-btn');
+const formCancelar = document.getElementById('form-cancelar');
+
+let idTarefaEmEdicao = null;
+
 listaTarefas.addEventListener('click', (e) => {
     const li = e.target.closest('li');
     if (!li) {
@@ -79,6 +87,14 @@ listaTarefas.addEventListener('click', (e) => {
     } else if (e.target.closest('label')) {
         e.preventDefault();
         tarefas[index].concluida = !tarefas[index].concluida;
+
+    } else if (e.target.classList.contains('editar')) {
+        e.preventDefault();
+        idTarefaEmEdicao = id
+        formInput.value = tarefas[index].texto
+        modal.style.display = '';
+        formInput.focus();
+
     } else {
         return
     }
@@ -87,3 +103,40 @@ listaTarefas.addEventListener('click', (e) => {
 });
 
 
+modal.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const editInput = formInput.value.trim();
+    if (!editInput) {
+        return
+    };
+
+    const index = tarefas.findIndex(t => t.id === idTarefaEmEdicao)
+    if (index !== -1) {
+        tarefas[index].texto = editInput;
+        modal.style.display = 'none'
+        idTarefaEmEdicao = null;
+        atualizarTudo();
+    }
+});
+
+const cancelarEdicao = () => {
+    modal.style.display = 'none';
+    idTarefaEmEdicao = null;
+
+}
+
+formCancelar.addEventListener('click', (e) => {
+    e.preventDefault();
+    cancelarEdicao();
+})
+
+window.addEventListener('keydown', (e) => {
+    if(modal.style.display !== 'none' && e.key === 'Escape'){
+        cancelarEdicao();
+    }
+})
+window.addEventListener('click', (e) => {
+    if(modal.style.display !== 'none' && !modal.contains(e.target) && !e.target.classList.contains('editar')){
+        cancelarEdicao();
+    }
+})
