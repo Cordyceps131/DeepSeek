@@ -49,6 +49,17 @@ inputBtn.addEventListener('click', (e) => {
 });
 
 
+listaTarefas.addEventListener('click', (e) => {
+    if (e.target.classList.contains('apagar-btn')) {
+        const li = e.target.closest('li');
+        const id = Number(li.id)
 
+        const index = tarefas.findIndex(t => t.id === id);
+        tarefas.splice(index, 1);
+        render(tarefas);
+        atualizarContador();
+    }
+
+});
 
 
