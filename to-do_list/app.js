@@ -123,12 +123,12 @@ const selectAll = document.getElementById('select-all');
 const apagarVarias = document.getElementById('apagar-varias');
 selectAll.addEventListener('click', (e) => {
     if (e.target.checked) {
-        tarefas.map(t => t.selecionada = true)
+        tarefas.forEach(t => t.selecionada = true)
         atualizarTudo();
 
     }
     else {
-        tarefas.map(t => t.selecionada = false)
+        tarefas.forEach(t => t.selecionada = false)
         atualizarTudo();
     }
     selected();
@@ -138,9 +138,13 @@ selectAll.addEventListener('click', (e) => {
 
 apagarVarias.addEventListener('click', (e) => {
     e.preventDefault();
-    const novoArray = tarefas.filter(t => !t.selecionada)
-    render(novoArray);
-    localStorage.setItem('tarefas', JSON.stringify(novoArray))
+    for (let i = tarefas.length -1; i >= 0; i--) {
+        if(tarefas[i].selecionada){
+            tarefas.splice(i, 1);
+        }
+    }
+    atualizarTudo();
+    selected();
 })
 
 
