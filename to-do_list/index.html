@@ -15,9 +15,14 @@
         <button id="input-btn" title="Adicionar Tarefa">Adicionar</button>
     </form>
     <p id="msg"></p>
+    <label>
+        <input id="select-all" type="checkbox">
+        Selecionar todas
+    </label>
     <section>
-        <ul id="lista-tarefas">
+        <ul id="lista-tarefas" style="list-style-type: none; padding: 0;">
         </ul>
+        <button id="apagar-varias" style="display: none;">Apagar Tarefas Selecionadas</button>
         <p id="contador"></p>
     </section>
     <form id="form" style="display: none; position: absolute; height: 300px; width: 100px;">

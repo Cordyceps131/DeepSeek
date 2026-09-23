@@ -13,6 +13,7 @@ const contador = document.getElementById('contador');
 const render = (tarefas) => {
     listaTarefas.innerHTML = tarefas.map(t =>
         `<li class="tarefa" id="${t.id}">
+            <input class="select" type="checkbox" ${t.selecionada ? "checked" : ''}>
             <label>
                 ${t.texto}&nbsp;
                 <input class="checkbox" type="checkbox" ${t.concluida ? "checked" : ''}>
@@ -38,6 +39,7 @@ const atualizarTudo = () => {
     localStorage.setItem('tarefas', JSON.stringify(tarefas));
 }
 
+
 if (tarefas.length > 0) {
     render(tarefas);
     atualizarContador();
@@ -53,7 +55,7 @@ inputBtn.addEventListener('click', (e) => {
         return;
     }
 
-    const novaTarefa = { id: proximoID++, texto: input, concluida: false };
+    const novaTarefa = { id: proximoID++, texto: input, concluida: false, selecionada: false };
     tarefas.push(novaTarefa);
     tarefa.value = '';
     tarefa.focus();
@@ -95,12 +97,51 @@ listaTarefas.addEventListener('click', (e) => {
         modal.style.display = '';
         formInput.focus();
 
-    } else {
+    } else if (e.target.classList.contains('select')) {
+        tarefas[index].selecionada = !tarefas[index].selecionada;
+        selected();
+    }
+    else {
         return
     }
 
     atualizarTudo();
 });
+
+
+const selected = () => {
+    const selecionadas = tarefas.some(t => t.selecionada)
+    if (selecionadas) {
+        apagarVarias.style.display = ""
+    }
+    else {
+        apagarVarias.style.display = "none"
+    }
+}
+
+const selectAll = document.getElementById('select-all');
+const apagarVarias = document.getElementById('apagar-varias');
+selectAll.addEventListener('click', (e) => {
+    if (e.target.checked) {
+        tarefas.map(t => t.selecionada = true)
+        atualizarTudo();
+
+    }
+    else {
+        tarefas.map(t => t.selecionada = false)
+        atualizarTudo();
+    }
+    selected();
+
+});
+
+
+apagarVarias.addEventListener('click', (e) => {
+    e.preventDefault();
+    const novoArray = tarefas.filter(t => !t.selecionada)
+    render(novoArray);
+    localStorage.setItem('tarefas', JSON.stringify(novoArray))
+})
 
 
 modal.addEventListener('submit', (e) => {
@@ -131,12 +172,13 @@ formCancelar.addEventListener('click', (e) => {
 })
 
 window.addEventListener('keydown', (e) => {
-    if(modal.style.display !== 'none' && e.key === 'Escape'){
+    if (modal.style.display !== 'none' && e.key === 'Escape') {
         cancelarEdicao();
     }
 })
 window.addEventListener('click', (e) => {
-    if(modal.style.display !== 'none' && !modal.contains(e.target) && !e.target.classList.contains('editar')){
+    if (modal.style.display !== 'none' && !modal.contains(e.target) && !e.target.classList.contains('editar')) {
         cancelarEdicao();
     }
 })
+
